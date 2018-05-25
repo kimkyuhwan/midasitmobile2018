@@ -33,7 +33,9 @@ public class MApplication extends Application{
         if(apiService == null){
             OkHttpClient.Builder oktHttpClient = new OkHttpClient.Builder();
             oktHttpClient.interceptors().add(new AddCookiesInterceptor());
-            oktHttpClient.interceptors().add(new ReceivedCookiesInterceptor());
+
+            //Body에 Cookie를 직접 넣어주므로 생략
+//            oktHttpClient.interceptors().add(new ReceivedCookiesInterceptor());
             retrofit = new Retrofit.Builder().
                     baseUrl(ApiService.URL).
                     client(oktHttpClient.build()).
@@ -52,7 +54,7 @@ public class MApplication extends Application{
         appInstance = this;
         OkHttpClient.Builder oktHttpClient = new OkHttpClient.Builder();
         oktHttpClient.interceptors().add(new AddCookiesInterceptor());
-        oktHttpClient.interceptors().add(new ReceivedCookiesInterceptor());
+//        oktHttpClient.interceptors().add(new ReceivedCookiesInterceptor());
         retrofit = new Retrofit.Builder().
                 baseUrl(ApiService.URL).
                 client(oktHttpClient.build()).

@@ -2,6 +2,8 @@ package com.example.hoyeonlee.example.Network;
 
 import com.example.hoyeonlee.example.Utils.Preferences;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.HashSet;
 
@@ -14,11 +16,9 @@ import okhttp3.Response;
 
 public class ReceivedCookiesInterceptor implements Interceptor {
 
-
     @Override
     public Response intercept(Chain chain) throws IOException {
         Response originalResponse = chain.proceed(chain.request());
-
         if (!originalResponse.headers("Set-Cookie").isEmpty()) {
             HashSet<String> cookies = new HashSet<>();
 
@@ -27,7 +27,7 @@ public class ReceivedCookiesInterceptor implements Interceptor {
             }
 
             // Preference에 cookies를 넣어주는 작업을 수행
-            SharedPreferenceBase.putSharedPreference(Preferences.SHARED_PREFERENCE_NAME_COOKIE, cookies);
+//            SharedPreferenceBase.putSharedPreference(Preferences.SHARED_PREFERENCE_NAME_COOKIE, cookies);
 
         }
 

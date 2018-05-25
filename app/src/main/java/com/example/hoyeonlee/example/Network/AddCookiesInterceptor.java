@@ -19,12 +19,10 @@ public class AddCookiesInterceptor implements Interceptor {
         Request.Builder builder = chain.request().newBuilder();
 
         // Preference에서 cookies를 가져오는 작업을 수행
-        Set<String> preferences =  SharedPreferenceBase.getSharedPreference(Preferences.SHARED_PREFERENCE_NAME_COOKIE, new HashSet<String>());
-
-            for (String cookie : preferences) {
-            builder.addHeader("cookie", cookie);
+        String key =  SharedPreferenceBase.getSharedPreference(Preferences.SHARED_PREFERENCE_NAME_COOKIE, "");
+        if(!key.equals("")) {
+            builder.addHeader("Authorization", "token " + key);
         }
-
         // Web,Android,iOS 구분을 위해 User-Agent세팅
         builder.removeHeader("User-Agent").addHeader("User-Agent", "Android");
 
