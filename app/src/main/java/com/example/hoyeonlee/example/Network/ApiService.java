@@ -38,6 +38,10 @@ public interface ApiService {
     @POST(subURL+"login/")
     Call<ResponseBody> signIn(@Body RequestBody body);
 
+
+    @PUT(subURL+"profile/")
+    Call<ResponseBody> updateToken(@Body RequestBody body);
+
     @GET(subURL+"test/")
     Call<ResponseBody> test();
 

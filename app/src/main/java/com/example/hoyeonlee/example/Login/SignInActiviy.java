@@ -3,17 +3,20 @@ package com.example.hoyeonlee.example.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.example.Firebase.MyFirebaseInstanceIDService;
 import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.MainActivity;
 import com.example.hoyeonlee.example.Network.SharedPreferenceBase;
 import com.example.hoyeonlee.example.R;
 import com.example.hoyeonlee.example.Utils.Preferences;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,6 +45,7 @@ public class SignInActiviy extends AppCompatActivity {
     Button btnSignin;
     @BindView(R.id.btn_signup)
     Button btnSignup;
+    String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +56,31 @@ public class SignInActiviy extends AppCompatActivity {
 
         //로그인 여부 확인
         if (SharedPreferenceBase.getSharedPreference("login") == true) {
+
             startActivity(new Intent(this, MainActivity.class));
+            token=FirebaseInstanceId.getInstance().getToken();
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("gcm",token)
+                    .build();
+            MApplication.getInstance().getApiService().updateToken(requestBody).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if(response.isSuccessful()){
+                        Log.d("DEBUGYU","token is "+token);
+                    }
+                    else{
+                        Log.d("DEBUGYU","token upload Failed ");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("DEBUGYU","token Failed ");
+                    t.printStackTrace();
+                }
+            });
             finish();
         }
     }

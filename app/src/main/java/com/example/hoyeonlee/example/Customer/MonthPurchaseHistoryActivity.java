@@ -196,14 +196,14 @@ public class MonthPurchaseHistoryActivity extends BackActionBarActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.leftBtn:
-                if(isValidMonth(currentdate.minusMonths(1))){
+                if(currentdate!=null && isValidMonth(currentdate.minusMonths(1))){
                     currentdate=currentdate.minusMonths(1);
                     setTextDateTime();
                     setValidDataChart();
                 }
                 break;
             case R.id.rightBtn:
-                if(isValidMonth(currentdate.plusMonths(1))){
+                if(currentdate!=null && isValidMonth(currentdate.plusMonths(1))){
                     currentdate=currentdate.plusMonths(1);
                     setTextDateTime();
                     setValidDataChart();

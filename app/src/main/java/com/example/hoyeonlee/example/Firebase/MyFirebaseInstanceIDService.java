@@ -2,8 +2,17 @@ package com.example.hoyeonlee.example.Firebase;
 
 import android.util.Log;
 
+import com.example.hoyeonlee.example.MApplication;
+import com.example.hoyeonlee.example.Network.SharedPreferenceBase;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
+
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     private static final String TAG = "MyFirebaseIIDService";
@@ -35,7 +44,29 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
      *
      * @param token The new token.
      */
-    private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+    private void sendRegistrationToServer(final String token) {
+        if (SharedPreferenceBase.getSharedPreference("login") == true) {
+            RequestBody requestBody = new MultipartBody.Builder()
+                    .setType(MultipartBody.FORM)
+                    .addFormDataPart("gcm", token)
+                    .build();
+            MApplication.getInstance().getApiService().updateToken(requestBody).enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("DEBUGYU", "token is " + token);
+                    } else {
+                        Log.d("DEBUGYU", "token upload Failed ");
+
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                    Log.d("DEBUGYU", "token Failed ");
+                    t.printStackTrace();
+                }
+            });
+        }
     }
 }
