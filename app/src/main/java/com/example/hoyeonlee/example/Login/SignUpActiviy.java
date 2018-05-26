@@ -22,6 +22,8 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,8 +66,15 @@ public class SignUpActiviy extends AppCompatActivity {
             Toast.makeText(SignUpActiviy.this, "비밀번호를 다시 입력해주세요", Toast.LENGTH_SHORT).show();
             return;
         }
+        RequestBody requestBody=new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("username",inputEmail.getText().toString())
+                .addFormDataPart("password1",inputPassword.getText().toString())
+                .addFormDataPart("password2",inputPasswordRe.getText().toString())
+                .build();
+
         MApplication.getInstance().getApiService()
-                .signUp(inputEmail.getText().toString(), inputPassword.getText().toString(), inputPasswordRe.getText().toString())
+                .signUp(requestBody)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
