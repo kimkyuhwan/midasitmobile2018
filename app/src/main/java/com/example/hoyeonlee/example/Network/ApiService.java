@@ -1,22 +1,16 @@
 package com.example.hoyeonlee.example.Network;
 
 import com.example.hoyeonlee.example.DataSchema.Menu;
-import com.example.hoyeonlee.example.DataSchema.Menus;
+import com.example.hoyeonlee.example.DataSchema.Reservation;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.RequestBody;
-import okhttp3.Response;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -34,13 +28,12 @@ public interface ApiService {
 
     @POST(subURL+"login/")
     Call<ResponseBody> signIn(@Body RequestBody body);
-//    Call<ResponseBody> signIn(@Field("username") String email, @Field("password") String password);
 
     @GET(subURL+"test/")
     Call<ResponseBody> test();
 
     @GET(subURL+"menus/")
-    Call<ArrayList<Menu>> getMenu();
+    Call<ArrayList<Menu>> getAllMenus();
 
     @POST(subURL+"menus/")
     Call<Menu> addMenu(@Body RequestBody body);
@@ -48,8 +41,19 @@ public interface ApiService {
     @DELETE(subURL+"menus/{id}/")
     Call<Menu> deleteMenu(@Path("id") String id);
 
-    @Headers({"Content-Type:text/xml"})
     @PUT(subURL+"menus/{id}/")
     Call<Menu> updateMenu(@Path("id") String id,@Body RequestBody body);
+
+    @GET(subURL+"status/")
+    Call<ArrayList<Reservation>> getAllOrders();
+
+    @GET(subURL+"status/?complete=false")
+    Call<ArrayList<Reservation>> getUnCompletedOrders(@Body RequestBody body);
+
+    @GET(subURL+"status/?complete=true")
+    Call<ArrayList<Reservation>> getCompletedOrders(@Body RequestBody body);
+
+    @PUT(subURL+"status/{id}")
+    Call<RequestBody> updateOrder(@Path("id") String id, @Body RequestBody body);
 
 }
