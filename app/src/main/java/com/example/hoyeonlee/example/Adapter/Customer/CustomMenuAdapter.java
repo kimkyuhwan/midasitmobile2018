@@ -69,7 +69,6 @@ public class CustomMenuAdapter extends RecyclerView.Adapter<CustomerMenuHolder> 
         holder.layout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,String.valueOf(position),Toast.LENGTH_LONG).show();
                 Intent it=new Intent(context,MenuDetailActivity.class);
                 Menu item=menu_list.get(position);
                 it.putExtra("id",String.valueOf(item.getId()));

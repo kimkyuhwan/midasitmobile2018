@@ -4,10 +4,8 @@ import android.content.Context;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.R;
 import com.squareup.picasso.Picasso;
 
@@ -17,31 +15,31 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by hoyeonlee on 2018. 5. 26..
  */
 
-public class CustomerMenuHolder extends RecyclerView.ViewHolder {
+public class ReceiptMenuHolder extends RecyclerView.ViewHolder {
     private Context context;
     private View view;
-    public CircleImageView imageView;
     public TextView nameView;
+    public TextView countView;
     public TextView priceView;
-    public ConstraintLayout layout;
+    public TextView detailView;
 
-    public CustomerMenuHolder(View itemView, Context context) {
+
+    public ReceiptMenuHolder(View itemView, Context context) {
         super(itemView);
         this.context = context;
         this.view = itemView;
-        layout=view.findViewById(R.id.item_layout);
-        imageView = view.findViewById(R.id.item_image);
-        nameView = view.findViewById(R.id.item_name);
+        nameView=view.findViewById(R.id.item_name);
+        countView = view.findViewById(R.id.item_count);
         priceView = view.findViewById(R.id.item_price);
+        detailView = view.findViewById(R.id.item_detail);
     }
 
 
 
-    public void setData(String imageUrl, String title, String category, int price){
-        Picasso.get().load(imageUrl)
-                .resize(60,60)
-                .into(imageView);
-        nameView.setText(title);
+    public void setData(String name, String detail, int count, int price){
+        nameView.setText(name);
+        if(detail!=null) detailView.setText(detail);
+        countView.setText(String.format("x%d",count));
         priceView.setText(String.format("%,d원", price));
     }
     public View getView() {

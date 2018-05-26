@@ -24,5 +24,6 @@ public class MainActivity extends AppCompatActivity {
         System.out.print("Hello World!");
         Intent it=new Intent(this,CustomerActivity.class);
         startActivity(it);
+        finish();
     }
 }

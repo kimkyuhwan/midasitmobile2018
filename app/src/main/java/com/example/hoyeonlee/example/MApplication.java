@@ -5,9 +5,12 @@ import android.provider.Settings;
 
 
 import com.example.hoyeonlee.example.DataSchema.OrderList;
+import com.example.hoyeonlee.example.DataSchema.ReservedItem;
 import com.example.hoyeonlee.example.Network.AddCookiesInterceptor;
 import com.example.hoyeonlee.example.Network.ApiService;
 import com.example.hoyeonlee.example.Network.ReceivedCookiesInterceptor;
+
+import java.util.ArrayList;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -19,11 +22,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MApplication extends Application{
     private static MApplication appInstance;
+
     private static OrderList orderList;
+    private static ArrayList<ReservedItem> reservedItems;
+
     Retrofit retrofit;
     ApiService apiService = null;
 
     //싱글턴 Application & APiService 객체
+
+
+    public static ArrayList<ReservedItem> getReservedItems() {
+        return reservedItems;
+    }
+
+    public static void setReservedItems(ArrayList<ReservedItem> reservedItems) {
+        MApplication.reservedItems = reservedItems;
+    }
 
     public static OrderList getOrderList(){
         return orderList;

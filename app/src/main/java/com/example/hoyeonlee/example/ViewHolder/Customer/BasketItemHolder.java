@@ -53,7 +53,7 @@ public class BasketItemHolder extends RecyclerView.ViewHolder {
         nameView.setText(name);
         detailView.setText(detail);
         itemCountView.setText(String.valueOf(cnt));
-        priceView.setText(String.valueOf(price)+" 원");
+        priceView.setText(String.format("%,d원", price));
 
     }
     public View getView() {

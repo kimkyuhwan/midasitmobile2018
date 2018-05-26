@@ -1,0 +1,55 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Customer.ShoppingBasketActivity"
+    android:orientation="vertical"
+    android:background="#fffbfc"
+    >
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+
+        <ImageButton
+            android:id="@+id/leftBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/left_arrow"
+            />
+
+        <TextView
+            android:id="@+id/current_month"
+            android:gravity="center"
+            android:text="2018. 05"
+            android:textSize="24dp"
+            android:textColor="#000"
+            android:layout_width="200dp"
+            android:layout_height="50dp" />
+
+        <ImageButton
+            android:id="@+id/rightBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/right_arrow"
+
+            />
+    </LinearLayout>
+
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/monthChart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    </com.github.mikephil.charting.charts.BarChart>
+
+</LinearLayout>

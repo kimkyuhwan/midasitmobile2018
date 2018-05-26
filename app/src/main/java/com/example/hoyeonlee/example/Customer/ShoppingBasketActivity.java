@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hoyeonlee.example.Adapter.Customer.BasketItemAdapter;
+import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.Login.SignInActiviy;
 import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.MainActivity;
@@ -34,7 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShoppingBasketActivity extends AppCompatActivity {
+public class ShoppingBasketActivity extends BackActionBarActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -56,7 +57,8 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_basket);
         ButterKnife.bind(this);
-        tvTitle.setText("장바구니");
+        setToolbar();
+        setTitle("장바구니");
         recyclerView = (RecyclerView) findViewById(R.id.orderList);
         recyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
@@ -80,7 +82,7 @@ public class ShoppingBasketActivity extends AppCompatActivity {
         });
     }
     void updateLastPrice(){
-        lastPrice.setText(String.valueOf(MApplication.getOrderList().getTotal_price())+" 원");
+        lastPrice.setText(String.format("%,d원", MApplication.getOrderList().getTotal_price()));
 
     }
 
@@ -99,12 +101,12 @@ public class ShoppingBasketActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(getApplicationContext(),"예약 완료되었습니다",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"주문 완료되었습니다",Toast.LENGTH_LONG).show();
                                 MApplication.getOrderList().clear();
                                 finish();
                             }
                             else{
-                                Toast.makeText(getApplicationContext(),"예약 실패하었습니다",Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(),"주문 실패하었습니다",Toast.LENGTH_LONG).show();
                             }
                         }
 

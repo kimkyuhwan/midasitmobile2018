@@ -1,14 +1,17 @@
-package com.example.hoyeonlee.example.Adapter.Admin;
+package com.example.hoyeonlee.example.Adapter.Customer;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.example.Customer.ReceiptActivity;
 import com.example.hoyeonlee.example.DataSchema.Reservation;
 import com.example.hoyeonlee.example.Etc.OnLongClickListener;
+import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.R;
 import com.example.hoyeonlee.example.ViewHolder.Admin.ReservationHolder;
 
@@ -30,22 +33,11 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationHolder> 
         reservations = new ArrayList<>();
     }
 
-    public void setOnLongClickListener(OnLongClickListener listener){
-        this.listener = listener;
-    }
     public void addAllOrders(ArrayList<Reservation> orders){
         this.reservations = orders;
         notifyDataSetChanged();
     }
-    public void deleteOrder(Reservation order){
-        Boolean isRemoved = reservations.remove(order);
-        if(!isRemoved){
-            Toast.makeText(context, "삭제 오류", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        Toast.makeText(context, "주문완료", Toast.LENGTH_SHORT).show();
-        notifyDataSetChanged();
-    }
+
     public void clear(){
         reservations.clear();
         notifyDataSetChanged();
@@ -71,9 +63,9 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationHolder> 
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(listener != null){
-                    listener.longClick(v,reservation,position);
-                }
+                Intent it=new Intent(context,ReceiptActivity.class);
+                MApplication.setReservedItems(reservations.get(position).getOrders());
+                context.startActivity(it);
             }
         });
     }

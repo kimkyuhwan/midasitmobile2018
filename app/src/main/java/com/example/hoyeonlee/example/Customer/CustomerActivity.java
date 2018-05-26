@@ -31,14 +31,19 @@ public class CustomerActivity extends AppCompatActivity {
 
     @OnClick({R.id.menuReserveBtn, R.id.checkReserveBtn, R.id.purchaseHistoryBtn})
     public void onViewClicked(View view) {
+        Intent it;
         switch (view.getId()) {
             case R.id.menuReserveBtn:
-                Intent it=new Intent(this,MenuReservationActivity.class);
+                it=new Intent(this,MenuReservationActivity.class);
                 startActivity(it);
                 break;
             case R.id.checkReserveBtn:
+                it=new Intent(this,CheckReservationActivity.class);
+                startActivity(it);
                 break;
             case R.id.purchaseHistoryBtn:
+                it=new Intent(this,MonthPurchaseHistoryActivity.class);
+                startActivity(it);
                 break;
         }
     }

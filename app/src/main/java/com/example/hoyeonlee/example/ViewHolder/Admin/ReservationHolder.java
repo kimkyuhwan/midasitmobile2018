@@ -32,12 +32,12 @@ public class ReservationHolder extends RecyclerView.ViewHolder {
     }
 
 
-    public void setData(String imageUrl, String time, int price){
+    public void setData(boolean state, String time, int price){
         String dateTime = DateTime.parse(time).toString("MM월 dd일 HH시 mm분 ss초");
-        Picasso.get().load(imageUrl)
-                .resize(100,100)
-                .placeholder(R.drawable.placeholder)
-                .centerCrop().into(profileView); // Image scaling typeinto(profileView// );
+        if(state)
+            profileView.setBackgroundResource(R.drawable.done_list);
+        else
+            profileView.setBackgroundResource(R.drawable.ing_list);
         timeView.setText(dateTime);
         String pr = String.format("%,d원", price);
         priceView.setText(pr);

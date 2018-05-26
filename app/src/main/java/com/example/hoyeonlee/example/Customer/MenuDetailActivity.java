@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.DataSchema.Order;
 import com.example.hoyeonlee.example.MApplication;
@@ -26,7 +27,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class MenuDetailActivity extends AppCompatActivity {
+public class MenuDetailActivity extends BackActionBarActivity {
 
     @BindView(R.id.tv_title)
     TextView tvTitle;
@@ -63,8 +64,9 @@ public class MenuDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_detail);
+        setToolbar();
+        setTitle("메뉴 주문");
         ButterKnife.bind(this);
-        tvTitle.setText("메뉴 주문");
         Intent intent=getIntent();
         String category=intent.getExtras().getString("category");
         int id=Integer.parseInt(intent.getExtras().getString("id"));
@@ -75,9 +77,12 @@ public class MenuDetailActivity extends AppCompatActivity {
         current_menu.setPrice(item_price);
         current_menu.setName(name);
 
-        Picasso.get().load(thumb).into(itemImage);
+        Picasso.get()
+                .load(thumb)
+                .resize(100,100)
+                .into(itemImage);
         itemName.setText(name);
-        itemPrice.setText(String.valueOf(item_count*item_price)+" 원");
+        itemPrice.setText(String.format("%,d원", item_count*item_price));
         if(category.equals("디저트")){
 
         }
@@ -96,14 +101,14 @@ public class MenuDetailActivity extends AppCompatActivity {
                 item_count=current_menu.getCount();
                 if(item_count>1){
                     itemCount.setText(String.valueOf(--item_count));
-                    itemPrice.setText(String.valueOf(item_count*item_price)+" 원");
+                    itemPrice.setText(String.format("%,d원", item_count*item_price));
                     current_menu.setCount(item_count);
                 }
                 break;
             case R.id.addBtn:
                 item_count=current_menu.getCount();
                 itemCount.setText(String.valueOf(++item_count));
-                itemPrice.setText(String.valueOf(item_count*item_price)+" 원");
+                itemPrice.setText(String.format("%,d원", item_count*item_price));
                 current_menu.setCount(item_count);
                 break;
             case R.id.basketBtn:
@@ -114,7 +119,12 @@ public class MenuDetailActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.orderBtn:
-
+                current_menu.setTemperature(spinnerTemperature.getText().toString());
+                current_menu.setSize(spinnerSize.getText().toString());
+                MApplication.getOrderList().addData(current_menu);
+                Intent it=new Intent(this,ShoppingBasketActivity.class);
+                startActivity(it);
+                finish();
                 break;
         }
     }

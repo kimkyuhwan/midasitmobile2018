@@ -11,12 +11,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MenuReservationActivity extends AppCompatActivity {
+public class MenuReservationActivity extends BackActionBarActivity {
 
     @BindView(R.id.menu_tab)
     TabLayout menuTab;
@@ -33,8 +34,8 @@ public class MenuReservationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_menu_reservation);
         ButterKnife.bind(this);
 
-        tvTitle.setText("메뉴 선택");
-        setSupportActionBar(toolbar);
+        setToolbar();
+        setTitle("메뉴 주문");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);

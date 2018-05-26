@@ -5,25 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Customer.CustomerActivity">
+    tools:context=".Customer.CustomerActivity"
+    android:background="#f0f9f0"
+    >
 
-    <Button
+    <ImageView
+        android:layout_marginTop="70dp"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/midas_main"
+
+        />
+    <Button
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:id="@+id/menuReserveBtn"
         android:text="메뉴 선택"
+        android:textSize="16dp"
+        android:background="@color/greeny_blue"
+        android:textColor="#fff"
         />
     <Button
-        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_margin="20dp"
         android:layout_height="wrap_content"
         android:id="@+id/checkReserveBtn"
         android:text="예약 확인"
+        android:textSize="16dp"
+        android:background="@color/greeny_blue"
+        android:textColor="#fff"
         />
     <Button
-        android:layout_width="wrap_content"
+        android:text="구매 내역"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_margin="20dp"
+        android:textSize="16dp"
         android:layout_height="wrap_content"
         android:id="@+id/purchaseHistoryBtn"
-        android:text="구매 내역"
+        android:background="@color/greeny_blue"
+        android:textColor="#fff"
+
         />
 
 </LinearLayout>

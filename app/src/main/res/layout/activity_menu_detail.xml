@@ -24,8 +24,8 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:layout_constraintLeft_toLeftOf="parent"
-            android:background="@mipmap/ic_launcher"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@drawable/placeholder"
             />
         <TextView
             android:layout_marginTop="15dp"

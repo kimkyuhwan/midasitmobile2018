@@ -72,4 +72,15 @@ public interface ApiService {
     @PUT(subURL+"status/{id}")
     Call<RequestBody> updateOrder(@Path("id") String id, @Body RequestBody body);
 
+
+     @GET(subURL+"orders/")
+    Call<ArrayList<Reservation>> getMyOrders();
+
+    @GET(subURL+"orders/?complete=false")
+    Call<ArrayList<Reservation>> getMyUnCompletedOrders();
+
+    @GET(subURL+"orders/?complete=true")
+    Call<ArrayList<Reservation>> getMyCompletedOrders();
+
+
 }

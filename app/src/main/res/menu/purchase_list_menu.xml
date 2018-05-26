@@ -2,9 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/shopping_basket"
+        android:id="@+id/state_btn"
         android:title=""
         app:showAsAction="always"
-        android:icon="@drawable/basket"
+        android:icon="@drawable/all_list"
         />
 </menu>
