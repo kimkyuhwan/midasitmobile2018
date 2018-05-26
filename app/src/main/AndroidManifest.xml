@@ -17,10 +17,7 @@
 
         <!-- NoActionBar Style 지정 -->
 
-        <activity android:name=".Login.SignInActiviy"></activity>
-        <activity android:name=".Login.SignUpActiviy" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".Admin.HomeActivity">
+        <activity android:name=".Login.SignInActiviy">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,9 +26,13 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".Admin.Customer.CustomerActivity" />
-        <activity android:name=".Admin.Menu.MenuActivity" />
-        <activity android:name=".Admin.Reservation.ReservationActivity" />
+        <activity android:name=".Login.SignUpActiviy" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Admin.HomeActivity" />
+        <activity android:name=".Customer.CustomerActivity" />
+        <activity android:name=".Customer.MenuReservationActivity" />
+        <activity android:name=".Customer.ShoppingBasketActivity" />
+        <activity android:name=".Customer.MenuDetailActivity"></activity>
     </application>
 
 </manifest>
