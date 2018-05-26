@@ -2,6 +2,7 @@ package com.example.hoyeonlee.example.Customer;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,6 +11,7 @@ import com.example.hoyeonlee.example.Admin.HomeActivity;
 import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.R;
 import com.example.hoyeonlee.example.Utils.StaticFunctions;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +37,7 @@ public class CustomerActivity extends BackActionBarActivity {
         setToolbar();
         setLogoutVisible();
         setTitle("홈");
+
 
     }
 
