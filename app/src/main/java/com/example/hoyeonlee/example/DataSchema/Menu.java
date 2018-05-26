@@ -21,6 +21,13 @@ public class Menu {
     @Expose
     private String category;
 
+    public Menu(Integer id, String name, String thumb, Integer price) {
+        this.id = id;
+        this.name = name;
+        this.thumb = thumb;
+        this.price = price;
+    }
+
     public Integer getId() {
         return id;
     }

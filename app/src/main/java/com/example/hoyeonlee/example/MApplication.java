@@ -4,6 +4,7 @@ import android.app.Application;
 import android.provider.Settings;
 
 
+import com.example.hoyeonlee.example.DataSchema.OrderList;
 import com.example.hoyeonlee.example.Network.AddCookiesInterceptor;
 import com.example.hoyeonlee.example.Network.ApiService;
 import com.example.hoyeonlee.example.Network.ReceivedCookiesInterceptor;
@@ -18,10 +19,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MApplication extends Application{
     private static MApplication appInstance;
+    private static OrderList orderList;
     Retrofit retrofit;
     ApiService apiService = null;
 
     //싱글턴 Application & APiService 객체
+
+    public static OrderList getOrderList(){
+        return orderList;
+    }
+
 
     public static MApplication getInstance(){
         if(appInstance == null){
@@ -50,7 +57,7 @@ public class MApplication extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
-
+        orderList=new OrderList();
         appInstance = this;
         OkHttpClient.Builder oktHttpClient = new OkHttpClient.Builder();
         oktHttpClient.interceptors().add(new AddCookiesInterceptor());

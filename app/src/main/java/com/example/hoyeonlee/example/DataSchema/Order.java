@@ -3,14 +3,20 @@ package com.example.hoyeonlee.example.DataSchema;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.annotations.SerializedName;
 
 import org.json.JSONObject;
 
 public class Order{
 
+
+    @SerializedName("menu_id")
     private int menu_id;
+    @SerializedName("temperature")
     private String temperature;
+    @SerializedName("count")
     private int count;
+    @SerializedName("size")
     private String size;
     private transient int price;
     private transient String name;
@@ -43,7 +49,6 @@ public class Order{
     }
 
     public Order(String key, int cnt){
-
         String value="";
         count=cnt;
         temperature=null;
@@ -104,7 +109,21 @@ public class Order{
     }
 
     public String makeKey(){
-        return String.valueOf(menu_id)+"#"+temperature+"#"+size+"#"+name+"#"+price+"#";
+        String ret=String.valueOf(menu_id)+"#";
+        if(temperature!=null && temperature.equals("null"))
+            temperature=null;
+        if(size!=null && size.equals("null"))
+            size=null;
+        if(temperature!=null){
+            ret+=temperature;
+        }
+        ret+="#";
+        if(size!=null){
+            ret+=size;
+        }
+        ret+="#";
+        ret+=name+"#"+price+"#";
+        return ret;
     }
 
     public String getJSONString(){
@@ -114,7 +133,7 @@ public class Order{
 
     public String getDetail(){
         if(size==null || size.equals("null")) return "";
-        else if(temperature==null) return size;
+        else if(temperature==null || temperature.equals("null")) return size;
         return temperature+" / " + size;
     }
 

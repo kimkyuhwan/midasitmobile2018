@@ -12,6 +12,7 @@ import java.util.Map;
 public class OrderList {
     HashMap<String,Integer> order_map;
     Iterator<Map.Entry<String, Integer> > it;
+    int total_price;
 
     public int size(){
         return order_map.size();
@@ -33,6 +34,7 @@ public class OrderList {
     public void changeValue(int idx, int value){
         Order temp=getOrder(idx);
         String key=temp.makeKey();
+        Log.d("DEBUGYU",key);
         int cnt=temp.getCount();
         order_map.put(key,cnt+value);
     }
@@ -44,8 +46,15 @@ public class OrderList {
         return here;
     }
 
-    public int getTotalPrice(){
-        int ret=0;
+    public int getTotal_price() {
+        return total_price;
+    }
+
+    public void setTotal_price(int total_price) {
+        this.total_price = total_price;
+    }
+    public void initTotalPrice(){
+        total_price=0;
         Iterator<Map.Entry<String, Integer>> it = order_map.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<String, Integer> pair = (Map.Entry<String, Integer>) it.next();
@@ -53,11 +62,9 @@ public class OrderList {
             Log.d("DEBUGYU",pair.getKey() + " = " + pair.getValue());
 
             Order here=new Order(pair.getKey(),pair.getValue());
-            ret+=here.getCount()*here.getPrice();
+            total_price+=here.getPrice()*here.getCount();
         }
-        return ret;
     }
-
 
     public OrderList() {
         order_map=new HashMap<String, Integer>();
@@ -86,9 +93,10 @@ public class OrderList {
 
     public void clear(){
         order_map.clear();
+        setTotal_price(0);
     }
 
-    public String getJSONOrderList(){
+    public ArrayList<Order> getJSONOrderList(){
         if(order_map==null){
             return null;
         }
@@ -105,6 +113,6 @@ public class OrderList {
         Gson gson=new Gson();
         String ret=gson.toJson(orderArrayList);
         Log.d("DEBUGYU",ret);
-        return ret;
+        return orderArrayList;
     }
 }
