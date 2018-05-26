@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/greeny_blue"
+        android:gravity="center_vertical"
         app:popupTheme="@style/AppTheme">
 
         <TextView
@@ -19,6 +20,14 @@
             android:textColor="@color/white"
             android:textSize="16dp"
             android:src="@mipmap/ic_launcher" />
+        <ImageView
+            android:id="@+id/btn_logout"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/logout"
+            android:layout_marginRight="10dp"
+            android:layout_gravity="right"
+            android:visibility="gone"/>
 
     </android.support.v7.widget.Toolbar>
 

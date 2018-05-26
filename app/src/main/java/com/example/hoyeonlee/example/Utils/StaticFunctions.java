@@ -25,7 +25,7 @@ public class StaticFunctions {
     public void goFirstPage(){
         SharedPreferenceBase.putSharedPreference("login",false);
 
-        Toast.makeText(context, "SESSION OUTDATED. PLEASE LOGIN AGAIN", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "LOGOUT! PLEASE LOGIN AGAIN", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, SignInActiviy.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

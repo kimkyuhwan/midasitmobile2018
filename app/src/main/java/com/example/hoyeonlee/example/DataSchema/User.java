@@ -13,9 +13,6 @@ public class User {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("password")
-    @Expose
-    private String password;
     @SerializedName("last_login")
     @Expose
     private String lastLogin;
@@ -28,6 +25,9 @@ public class User {
     @SerializedName("first_name")
     @Expose
     private String firstName;
+    @SerializedName("gender")
+    @Expose
+    private boolean gender;
     @SerializedName("last_name")
     @Expose
     private String lastName;
@@ -65,14 +65,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getLastLogin() {
@@ -187,4 +179,35 @@ public class User {
         this.userPermissions = userPermissions;
     }
 
+    public Boolean getSuperuser() {
+        return isSuperuser;
+    }
+
+    public void setSuperuser(Boolean superuser) {
+        isSuperuser = superuser;
+    }
+
+    public String getGender() {
+        return gender?"남":"여";
+    }
+
+    public void setGender(boolean gender) {
+        this.gender = gender;
+    }
+
+    public Boolean getStaff() {
+        return isStaff;
+    }
+
+    public void setStaff(Boolean staff) {
+        isStaff = staff;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
+    }
 }

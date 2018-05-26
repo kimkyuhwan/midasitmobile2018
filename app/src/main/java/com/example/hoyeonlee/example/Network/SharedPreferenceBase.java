@@ -30,6 +30,12 @@ public class SharedPreferenceBase{
         editor.putBoolean(key,value);
         editor.commit();
     }
+    public static void putIntSharedPreference(String key, int value){
+        sp = MApplication.getInstance().getSharedPreferences("storage", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putInt(key,value);
+        editor.commit();
+    }
 
     public static String getSharedPreference(String key, @Nullable String defaultValue){
         sp = MApplication.getInstance().getSharedPreferences("storage", Context.MODE_PRIVATE);
@@ -38,6 +44,10 @@ public class SharedPreferenceBase{
     public static Boolean getSharedPreference(String key){
         sp = MApplication.getInstance().getSharedPreferences("storage", Context.MODE_PRIVATE);
         return sp.getBoolean(key,false);
+    }
+    public static int getIntSharedPreference(String key){
+        sp = MApplication.getInstance().getSharedPreferences("storage", Context.MODE_PRIVATE);
+        return sp.getInt(key,0);
     }
 
 }

@@ -33,11 +33,11 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationHolder> 
     public void setOnLongClickListener(OnLongClickListener listener){
         this.listener = listener;
     }
-    public void addAllOrders(ArrayList<Reservation> orders){
+    public void addAllReservations(ArrayList<Reservation> orders){
         this.reservations = orders;
         notifyDataSetChanged();
     }
-    public void deleteOrder(Reservation order){
+    public void deleteReservation(Reservation order){
         Boolean isRemoved = reservations.remove(order);
         if(!isRemoved){
             Toast.makeText(context, "삭제 오류", Toast.LENGTH_SHORT).show();
@@ -60,14 +60,14 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationHolder> 
     @Override
     public ReservationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_reservation,parent,false);
-        ReservationHolder OrderHolder = new ReservationHolder(context,view);
-        return OrderHolder;
+        ReservationHolder reservationHolder = new ReservationHolder(context,view);
+        return reservationHolder;
     }
 
     @Override
     public void onBindViewHolder(ReservationHolder holder, final int position) {
         final Reservation reservation = reservations.get(position);
-        holder.setData(reservation.getComplete(),reservation.getCreatedAt(),reservation.getAmount());
+        holder.setData(reservation.getUser().getProfile(),reservation.getUser().getUsername(),reservation.getCreatedAt(),reservation.getAmount());
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

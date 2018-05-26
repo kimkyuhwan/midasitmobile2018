@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -35,7 +36,10 @@ public class BackActionBarActivity extends AppCompatActivity {
             });
         }
     }
-
+    protected void setLogoutVisible(){
+        ImageView iv = toolbar.findViewById(R.id.btn_logout);
+        iv.setVisibility(View.VISIBLE);
+    }
     protected void setTitle(@NonNull String title){
         TextView titleTextView = toolbar.findViewById(R.id.tv_title);
         titleTextView.setText(title);

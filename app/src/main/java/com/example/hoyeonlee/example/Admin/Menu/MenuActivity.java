@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -12,14 +12,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.hoyeonlee.example.Adapter.Admin.MenuAdapter;
-import com.example.hoyeonlee.example.Admin.Reservation.ReservationActivity;
+import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.Etc.OnLongClickListener;
 import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.Network.ApiService;
 import com.example.hoyeonlee.example.R;
-
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
@@ -38,7 +38,7 @@ import retrofit2.Response;
  * Created by hoyeonlee on 2018. 5. 26..
  */
 
-public class MenuActivity extends AppCompatActivity {
+public class MenuActivity extends BackActionBarActivity {
     public static final int PICK_IMAGE_REQUEST = 1000;
     private static final String TAG = "MENU_ACTIVITY";
     @BindView(R.id.tv_title)
@@ -52,13 +52,16 @@ public class MenuActivity extends AppCompatActivity {
     MenuUpdateDialog dialog;
     MenuAdapter adapter;
     ApiService apiService;
+    @BindView(R.id.menu_tab)
+    TabLayout menuTab;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         ButterKnife.bind(this);
-        ((TextView) toolbar.findViewById(R.id.tv_title)).setText("메뉴 관리");
+        setToolbar();
+        setTitle("메뉴 관리");
         apiService = MApplication.getInstance().getApiService();
 
         adapter = new MenuAdapter(this);
@@ -69,14 +72,48 @@ public class MenuActivity extends AppCompatActivity {
         adapter.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public void longClick(View view, Object object, int position) {
-                final Menu data = (Menu)object;
-                dialog = new MenuUpdateDialog(MenuActivity.this,data);
+                final Menu data = (Menu) object;
+                dialog = new MenuUpdateDialog(MenuActivity.this, data);
                 dialog.show();
             }
         });
         initialize();
+
+        menuTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                switch(tab.getPosition()){
+                    case 0:
+                        adapter.setType("커피");
+                        break;
+                    case 1:
+                        adapter.setType("티");
+                        break;
+                    case 2:
+                        adapter.setType("요거트");
+                        break;
+                    case 3:
+                        adapter.setType("디저트");
+                        break;
+                    default:
+                        adapter.setType("커피");
+                        break;
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
     }
-    public void initialize(){
+
+    public void initialize() {
         //데이터 받기
         apiService.getAllMenus().enqueue(new Callback<ArrayList<Menu>>() {
             @Override

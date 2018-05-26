@@ -24,15 +24,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".Login.SignUpActiviy" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".Admin.HomeActivity" />
         <activity android:name=".Customer.CustomerActivity" />
         <activity android:name=".Customer.MenuReservationActivity" />
         <activity android:name=".Customer.ShoppingBasketActivity" />
         <activity android:name=".Customer.MenuDetailActivity"></activity>
+        <activity android:name=".Admin.HomeActivity" >
+
+        </activity>
+        <activity android:name=".Admin.Reservation.ReservationActivity"/>
+        <activity android:name=".Admin.Menu.MenuActivity"/>
+        <activity android:name=".Admin.User.UserActivity"/>
     </application>
 
 </manifest>

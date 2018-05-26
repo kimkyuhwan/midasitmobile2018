@@ -1,44 +1,31 @@
 package com.example.hoyeonlee.example.Admin.Reservation;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hoyeonlee.example.Admin.Menu.MenuActivity;
-import com.example.hoyeonlee.example.DataSchema.Menu;
+import com.example.hoyeonlee.example.DataSchema.Reservation;
+import com.example.hoyeonlee.example.DataSchema.ReservedItem;
 import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.Network.ApiService;
 import com.example.hoyeonlee.example.R;
-import com.squareup.picasso.Picasso;
-
-import org.angmarch.views.NiceSpinner;
+import com.example.hoyeonlee.example.ViewHolder.Admin.ReservedCustomView;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -53,25 +40,78 @@ public class ReservationUpdateDialog extends Dialog {
 
     ApiService apiService;
     ReservationActivity context;
-    public ReservationUpdateDialog(@NonNull Context context) {
+    @BindView(R.id.layout_reservation)
+    LinearLayout reservationLayout;
+    @BindView(R.id.btn_complete)
+    Button btnComplete;
+    Reservation reservation;
+    @BindView(R.id.tv_list)
+    TextView listTextView;
+
+    public ReservationUpdateDialog(@NonNull Context context, Reservation reservation) {
         super(context);
         this.context = (ReservationActivity) context;
+        this.reservation = reservation;
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dialog_addmenu);
+        setContentView(R.layout.dialog_reservation);
         ButterKnife.bind(this);
         apiService = MApplication.getInstance().getApiService();
-
+        //이름 + 주문내역
+        listTextView.setText(reservation.getUser().getUsername()+"님 주문내역");
         //Dialog Size 조정
         DisplayMetrics metrics = new DisplayMetrics(); //get metrics of screen
         context.getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        int height = (int) (metrics.heightPixels * 0.9); //set height to 90% of total
-        int width = (int) (metrics.widthPixels * 0.9); //set width to 90% of total
+        int height = (int) (metrics.heightPixels * 0.90); //set height to 90% of total
+        int width = (int) (metrics.widthPixels * 0.95); //set width to 90% of total
         getWindow().setLayout(width, height); //set layout
+
+        addView();
     }
 
+    public void addView() {
+        for (int i = 0; i < reservation.getOrders().size(); i++) {
+            ReservedCustomView view = new ReservedCustomView(context);
+            ReservedItem item = reservation.getOrders().get(i);
+            String imgUrl = item.getMenu().getThumb();
+            String name = item.getMenu().getName();
+            String count = item.getCount() + "";
+            String attr = "";
+            if (item.getTemperature() != null) {
+                attr = item.getTemperature() + " / " + item.getSize();
+            } else {
+                view.findViewById(R.id.tv_attribute).setVisibility(View.GONE);
+            }
+            view.setData(imgUrl, name, attr, count);
+            reservationLayout.addView(view);
+        }
+    }
 
+    @OnClick(R.id.btn_complete)
+    public void onViewClicked() {
+        apiService.updateReservation(reservation.getId() + "").enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    context.adapter.deleteReservation(reservation);
+                    Log.v(TAG, response.body().toString());
+                } else {
+                    try {
+                        Toast.makeText(getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

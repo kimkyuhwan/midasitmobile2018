@@ -1,9 +1,11 @@
 package com.example.hoyeonlee.example.Network;
 
+import com.example.hoyeonlee.example.DataSchema.LoginResult;
 import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.DataSchema.Menus;
 import com.example.hoyeonlee.example.DataSchema.Order;
 import com.example.hoyeonlee.example.DataSchema.Reservation;
+import com.example.hoyeonlee.example.DataSchema.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +35,13 @@ public interface ApiService {
     public static final String subURL = "/api/v1/";
 
     @POST(subURL+"registration/")
-    Call<ResponseBody> signUp(@Body RequestBody body);
+    Call<LoginResult> signUp(@Body RequestBody body);
 
-    @POST(subURL+"login/")
-    Call<ResponseBody> signIn(@Body RequestBody body);
+    @POST(subURL+"signin/")
+    Call<LoginResult> signIn(@Body RequestBody body);
+
+    @PUT(subURL+"profile/")
+    Call<User> setProfile(@Body RequestBody body);
 
     @GET(subURL+"test/")
     Call<ResponseBody> test();
@@ -61,16 +66,19 @@ public interface ApiService {
     Call<Menu> updateMenu(@Path("id") String id,@Body RequestBody body);
 
     @GET(subURL+"status/")
-    Call<ArrayList<Reservation>> getAllOrders();
+    Call<ArrayList<Reservation>> getAllReservations();
 
     @GET(subURL+"status/?complete=false")
-    Call<ArrayList<Reservation>> getUnCompletedOrders(@Body RequestBody body);
+    Call<ArrayList<Reservation>> getUnCompletedReservations();
 
     @GET(subURL+"status/?complete=true")
-    Call<ArrayList<Reservation>> getCompletedOrders(@Body RequestBody body);
+    Call<ArrayList<Reservation>> getCompletedReservations();
 
-    @PUT(subURL+"status/{id}")
-    Call<RequestBody> updateOrder(@Path("id") String id, @Body RequestBody body);
+    @PUT(subURL+"status/{id}/")
+    Call<ResponseBody> updateReservation(@Path("id") String id);
+
+    @GET(subURL+"users/")
+    Call<ArrayList<User>> getUsers();
 
 
      @GET(subURL+"orders/")
