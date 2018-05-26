@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.DataSchema.User;
 import com.example.hoyeonlee.example.Etc.OnLongClickListener;
 import com.example.hoyeonlee.example.R;
@@ -23,41 +24,42 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
     Context context;
     ArrayList<User> users;
+    ArrayList<User> partialUsers;
+    boolean isStaff = false;
     private OnLongClickListener listener;
 
     public UserAdapter(Context context){
         this.context = context;
         users = new ArrayList<>();
+        partialUsers = new ArrayList<>();
     }
 
     public void setOnLongClickListener(OnLongClickListener listener){
         this.listener = listener;
     }
-    public void addAllUsers(ArrayList<User> users){
+    public void setType(boolean isStaff){
+        this.isStaff = isStaff;
+        partialUsers = new ArrayList<>();
         for(User user : users){
-            if(!user.getIsStaff()){
-                this.users.add(user);
+            if(user.getIsStaff() == isStaff){
+                partialUsers.add(user);
             }
         }
         notifyDataSetChanged();
     }
-    public void addOnlyStaffs(ArrayList<User> users){
-        for(User user : users){
-            if(user.getIsStaff()){
-                this.users.add(user);
-            }
-        }
-        notifyDataSetChanged();
+    public void addAllUsers(ArrayList<User> users){
+        this.users = users;
+        setType(isStaff);
     }
     public void addUser(User user){
         users.add(user);
-        notifyDataSetChanged();
+        setType(isStaff);
     }
     public void updateUser(User prevUser,User nowUser){
         int prevIndex = users.indexOf(prevUser);
         users.add(prevIndex+1,nowUser);
         users.remove(prevIndex);
-        notifyDataSetChanged();
+        setType(isStaff);
     }
     public void deleteUser(User user){
         Boolean isRemoved = users.remove(user);
@@ -66,7 +68,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
             return;
         }
         Toast.makeText(context, "삭제완료", Toast.LENGTH_SHORT).show();
-        notifyDataSetChanged();
+        setType(isStaff);
     }
     public void clear(){
         users.clear();
@@ -76,7 +78,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return partialUsers.size();
     }
 
     @Override
@@ -88,7 +90,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
     @Override
     public void onBindViewHolder(UserHolder holder, final int position) {
-        final User user = users.get(position);
+        final User user = partialUsers.get(position);
         holder.setData(user.getProfile(),user.getFirstName(),user.getGender(),user.getIsStaff());
         holder.getView().setOnClickListener(new View.OnClickListener() {
             @Override
