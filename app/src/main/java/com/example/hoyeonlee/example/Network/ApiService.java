@@ -1,5 +1,8 @@
 package com.example.hoyeonlee.example.Network;
 
+import com.example.hoyeonlee.example.DataSchema.Menu;
+import com.example.hoyeonlee.example.DataSchema.Menus;
+
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
@@ -28,4 +31,7 @@ public interface ApiService {
 
     @GET(subURL+"test/")
     Call<ResponseBody> test();
+
+    @GET(subURL+"menus/")
+    Call<Menus> getMenu();
 }
