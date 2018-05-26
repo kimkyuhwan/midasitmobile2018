@@ -3,6 +3,7 @@ package com.example.hoyeonlee.example.Login;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,12 +19,14 @@ import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.Network.SharedPreferenceBase;
 import com.example.hoyeonlee.example.R;
 import com.example.hoyeonlee.example.Utils.Preferences;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,6 +44,7 @@ public class SignInActiviy extends AppCompatActivity {
     @BindView(R.id.btn_signup)
     Button btnSignup;
 
+    String token="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +55,9 @@ public class SignInActiviy extends AppCompatActivity {
         //로그인 여부 확인
         if (SharedPreferenceBase.getSharedPreference("login") == true) {
             //Code 가 0일 때 고객 , 1 2 일때 관리자
+
+
+            tokenUpload();
             if(SharedPreferenceBase.getIntSharedPreference("status") == 0){
                 startActivity(new Intent(this, CustomerActivity.class));
             }else {
@@ -91,10 +98,11 @@ public class SignInActiviy extends AppCompatActivity {
                                     SharedPreferenceBase.putSharedPreference("login", true);
 
                                     Intent intent;
+                                    tokenUpload();
                                     if(getStatus(user) != 0){
                                         intent = new Intent(getApplicationContext(), HomeActivity.class);
                                     }else{
-                                        intent = new Intent(getApplicationContext(), UserActivity.class);
+                                        intent = new Intent(getApplicationContext(), CustomerActivity.class);
                                     }
                                     startActivity(intent);
                                     finish();
@@ -122,5 +130,30 @@ public class SignInActiviy extends AppCompatActivity {
             }
             return 0;
         }
+    }
+
+    private void tokenUpload(){
+        token=FirebaseInstanceId.getInstance().getToken();
+        RequestBody requestBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart("gcm", token)
+                .build();
+        MApplication.getInstance().getApiService().updateToken(requestBody).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                if (response.isSuccessful()) {
+                    Log.d("DEBUGYU", "token is " + token);
+                } else {
+                    Log.d("DEBUGYU", "token upload Failed ");
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                Log.d("DEBUGYU", "token Failed ");
+                t.printStackTrace();
+            }
+        });
     }
 }
