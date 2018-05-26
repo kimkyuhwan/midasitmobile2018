@@ -6,13 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CustomerActivity extends AppCompatActivity {
+public class CustomerActivity extends BackActionBarActivity {
 
     @BindView(R.id.menuReserveBtn)
     Button menuReserveBtn;
@@ -26,6 +27,9 @@ public class CustomerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer);
         ButterKnife.bind(this);
+        setToolbar();
+        setLogoutVisible();
+        setTitle("홈");
 
     }
 
