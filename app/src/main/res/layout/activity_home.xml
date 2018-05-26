@@ -18,13 +18,14 @@
         android:layout_height="150dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/reservation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/layout_menu"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_hello">
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
             android:id="@+id/textView1"
@@ -53,11 +54,10 @@
         android:id="@+id/layout_customer"
         android:layout_width="0dp"
         android:layout_height="150dp"
-        android:layout_marginBottom="28dp"
         android:layout_marginEnd="20dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/management"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/layout_reservation"
         app:layout_constraintEnd_toStartOf="@+id/layout_statistics"
         app:layout_constraintHorizontal_bias="0.5"
@@ -87,7 +87,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/layout_reservation"
         app:layout_constraintTop_toBottomOf="@+id/tv_hello"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
             android:id="@+id/textView2"

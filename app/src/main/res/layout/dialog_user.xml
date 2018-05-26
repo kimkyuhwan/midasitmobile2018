@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="30dp">
+
+    <Button
+        android:id="@+id/btn_detail"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button"
+        android:text="구매내역 보기"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/btn_delete"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_button"
+        android:text="사용자 삭제"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+    <Button
+        android:id="@+id/btn_supervisor"
+        android:layout_width="300dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/shape_button"
+        android:text="관리자 지정"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+</LinearLayout>
