@@ -43,6 +43,10 @@ public interface ApiService {
     @PUT(subURL+"profile/")
     Call<User> setProfile(@Body RequestBody body);
 
+
+    @PUT(subURL+"profile/")
+    Call<ResponseBody> updateToken(@Body RequestBody body);
+
     @GET(subURL+"test/")
     Call<ResponseBody> test();
 

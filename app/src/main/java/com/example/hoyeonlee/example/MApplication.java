@@ -6,9 +6,11 @@ import android.provider.Settings;
 
 import com.example.hoyeonlee.example.DataSchema.OrderList;
 import com.example.hoyeonlee.example.DataSchema.ReservedItem;
+import com.example.hoyeonlee.example.Firebase.MyFirebaseInstanceIDService;
 import com.example.hoyeonlee.example.Network.AddCookiesInterceptor;
 import com.example.hoyeonlee.example.Network.ApiService;
 import com.example.hoyeonlee.example.Network.ReceivedCookiesInterceptor;
+import com.google.firebase.FirebaseApp;
 
 import java.util.ArrayList;
 
@@ -83,6 +85,7 @@ public class MApplication extends Application{
                 addConverterFactory(GsonConverterFactory.create()).
                 build();
         apiService = retrofit.create(ApiService.class);
+        FirebaseApp.initializeApp(this);
     }
 
 
