@@ -76,6 +76,7 @@ public class StatisticsActivity extends BackActionBarActivity {
 
     void setTextDateTime() {
         String text = currentdate.toString("YYYY. MM");
+        currentMonth.setText(text);
         Log.d("DEBUGYU", text);
     }
 
@@ -170,9 +171,9 @@ public class StatisticsActivity extends BackActionBarActivity {
                     } else {
                         Reservation first = reservations.get(0);
                         Reservation last = reservations.get(reservations.size() - 1);
-                        firstdate = DateTime.parse(first.getCreatedAt());
+                        firstdate = DateTime.parse(first.getCreatedAt()).minusSeconds(1);
                         lastdate = DateTime.parse(last.getCreatedAt());
-                        currentdate = new DateTime(lastdate);
+                        currentdate = new DateTime(lastdate).minusSeconds(1);
                         Log.d("DEBUGYU", firstdate.toString());
                         Log.d("DEBUGYU", lastdate.toString());
                         Log.d("DEBUGYU", currentdate.toString());
