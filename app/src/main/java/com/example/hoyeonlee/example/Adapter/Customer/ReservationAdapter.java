@@ -13,7 +13,7 @@ import com.example.hoyeonlee.example.DataSchema.Reservation;
 import com.example.hoyeonlee.example.Etc.OnLongClickListener;
 import com.example.hoyeonlee.example.MApplication;
 import com.example.hoyeonlee.example.R;
-import com.example.hoyeonlee.example.ViewHolder.Admin.ReservationHolder;
+import com.example.hoyeonlee.example.ViewHolder.Customer.ReservationHolder;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class ReservationAdapter extends RecyclerView.Adapter<ReservationHolder> 
 
     @Override
     public ReservationHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.item_reservation,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_reservation_customer,parent,false);
         ReservationHolder OrderHolder = new ReservationHolder(context,view);
         return OrderHolder;
     }
