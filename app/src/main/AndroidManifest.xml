@@ -15,7 +15,10 @@
 
         <!-- NoActionBar Style 지정 -->
 
-        <activity android:name=".Login.SignInActiviy">
+        <activity android:name=".Login.SignInActiviy"></activity>
+        <activity android:name=".Login.SignUpActiviy" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".Admin.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,9 +26,9 @@
                 <category android:name="android.intent.category.MULTIWINDOW_LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.SignUpActiviy" />
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".Admin.HomeActivity"></activity>
+        <activity android:name=".Admin.Customer.CustomerActivity" />
+        <activity android:name=".Admin.Menu.MenuActivity" />
+        <activity android:name=".Admin.Reservation.ReservationActivity" />
     </application>
 
 </manifest>

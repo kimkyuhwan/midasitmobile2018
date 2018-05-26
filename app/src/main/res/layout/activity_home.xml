@@ -6,4 +6,78 @@
     android:layout_height="match_parent"
     tools:context="com.example.hoyeonlee.example.Admin.HomeActivity">
 
+    <include
+        android:id="@+id/include"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <FrameLayout
+        android:id="@+id/layout_reservation"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/greeny_blue"
+        app:layout_constraintBottom_toTopOf="@+id/layout_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_hello">
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="예약 관리" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_hello"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="OOO님 안녕하세요"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_editor_absoluteY="80dp" />
+
+    <FrameLayout
+        android:id="@+id/layout_customer"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="28dp"
+        android:background="@color/greeny_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout_menu">
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="고객 관리" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/greeny_blue"
+        app:layout_constraintBottom_toTopOf="@+id/layout_customer"
+        app:layout_constraintEnd_toEndOf="@+id/layout_reservation"
+        app:layout_constraintTop_toBottomOf="@+id/layout_reservation">
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="메뉴 관리" />
+    </FrameLayout>
+
 </android.support.constraint.ConstraintLayout>
