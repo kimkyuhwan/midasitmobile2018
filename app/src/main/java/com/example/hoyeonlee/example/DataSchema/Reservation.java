@@ -12,7 +12,7 @@ public class Reservation {
     private Integer id;
     @SerializedName("user")
     @Expose
-    private Integer user;
+    private User user;
     @SerializedName("amount")
     @Expose
     private Integer amount;
@@ -42,11 +42,11 @@ public class Reservation {
         this.id = id;
     }
 
-    public Integer getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Integer user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
