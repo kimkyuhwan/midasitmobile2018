@@ -17,6 +17,10 @@ public class Menu {
     @Expose
     private Integer price;
 
+    @SerializedName("category")
+    @Expose
+    private String category;
+
     public Integer getId() {
         return id;
     }
@@ -49,4 +53,11 @@ public class Menu {
         this.price = price;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 }
