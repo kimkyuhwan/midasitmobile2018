@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:id="@+id/event_layout"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:gravity="center_vertical"
+        android:id="@+id/event_title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@+id/item_image"
+        app:layout_constraintTop_toTopOf="@+id/item_image"
+        android:text="아메리카노"
+        android:textColor="#000"
+        android:textSize="15dp"
+        />
+
+
+
+</LinearLayout>

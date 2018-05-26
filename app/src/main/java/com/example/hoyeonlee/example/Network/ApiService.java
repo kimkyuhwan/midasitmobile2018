@@ -1,5 +1,6 @@
 package com.example.hoyeonlee.example.Network;
 
+import com.example.hoyeonlee.example.DataSchema.Event;
 import com.example.hoyeonlee.example.DataSchema.LoginResult;
 import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.DataSchema.Menus;
@@ -94,5 +95,10 @@ public interface ApiService {
     @GET(subURL+"orders/?complete=true")
     Call<ArrayList<Reservation>> getMyCompletedOrders();
 
+    @GET(subURL+"events/")
+    Call<ArrayList<Event>> getEvents();
+
+    @POST(subURL+"events/")
+    Call<ResponseBody> createEvent(@Body RequestBody body);
 
 }
