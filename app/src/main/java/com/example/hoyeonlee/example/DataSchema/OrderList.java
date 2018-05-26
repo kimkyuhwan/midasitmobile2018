@@ -1,18 +1,13 @@
 package com.example.hoyeonlee.example.DataSchema;
 
-import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.google.gson.Gson;
 
-import org.json.JSONArray;
-
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class OrderList {
     HashMap<String,Integer> order_map;

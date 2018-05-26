@@ -9,37 +9,37 @@ import android.widget.TextView;
 import com.example.hoyeonlee.example.R;
 import com.squareup.picasso.Picasso;
 
+import org.joda.time.DateTime;
+
 /**
  * Created by hoyeonlee on 2018. 5. 26..
  */
 
-public class MenuHolder extends RecyclerView.ViewHolder {
+public class ReservationHolder extends RecyclerView.ViewHolder {
     private Context context;
     private View view;
-    public ImageView imageView;
-    public TextView titleView;
-    public TextView categoryView;
+    public ImageView profileView;
+    public TextView timeView;
     public TextView priceView;
 
-    public MenuHolder(Context context, View view){
+    public ReservationHolder(Context context, View view){
         super(view);
         this.context = context;
         this.view = view;
-        imageView = view.findViewById(R.id.iv_profile);
-        titleView = view.findViewById(R.id.tv_title);
-        categoryView = view.findViewById(R.id.tv_category);
-        priceView = view.findViewById(R.id.tv_time);
+        profileView = view.findViewById(R.id.iv_profile);
+        timeView = view.findViewById(R.id.tv_time);
+        priceView = view.findViewById(R.id.tv_price);
     }
 
 
-    public void setData(String imageUrl, String title, String category, int price){
+    public void setData(String imageUrl, String time, int price){
+        String dateTime = DateTime.parse(time).toString("MM월 dd일 HH시 mm분 ss초");
         Picasso.get().load(imageUrl)
                 .resize(100,100)
                 .placeholder(R.drawable.placeholder)
-                .centerCrop().into(imageView); // Image scaling typeinto(imageView);
+                .centerCrop().into(profileView); // Image scaling typeinto(profileView// );
+        timeView.setText(dateTime);
         String pr = String.format("%,d원", price);
-        titleView.setText(title);
-        categoryView.setText(category);
         priceView.setText(pr);
     }
     public View getView() {

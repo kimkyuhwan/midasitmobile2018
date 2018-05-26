@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp">
+
+    <ImageButton
+        android:id="@+id/ibtn_delete"
+        android:layout_width="20dp"
+        android:layout_height="30dp"
+        android:layout_gravity="right"
+        android:scaleType="centerCrop"
+        android:src="@drawable/garbage"
+        android:background="@android:color/transparent"
+        android:visibility="invisible" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_picture"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        android:src="@drawable/placeholder"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="1dp" />
+
+    <EditText
+        android:id="@+id/input_name"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_input"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="이름"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="10dp"
+        android:textSize="18sp" />
+
+    <org.angmarch.views.NiceSpinner
+        android:id="@+id/spinner_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/input_price"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_input"
+        android:ems="10"
+        android:gravity="center_vertical"
+        android:hint="가격"
+        android:inputType="number"
+        android:paddingLeft="10dp"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btn_complete"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/shape_button"
+        android:text="완료"
+        android:textColor="@color/white"
+        android:textSize="12sp" />
+
+</LinearLayout>

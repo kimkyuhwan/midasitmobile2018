@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
-public class Order {
+public class Order{
 
     private int menu_id;
     private String temperature;
@@ -14,6 +14,7 @@ public class Order {
     private String size;
     private transient int price;
     private transient String name;
+
     public Order(int menu_id, int count,String temperature, String size) {
         this.menu_id = menu_id;
         this.temperature = temperature;

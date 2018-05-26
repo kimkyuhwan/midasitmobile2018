@@ -9,4 +9,5 @@
     <color name="black">#000000</color>
     <color name="gray">#dddddd</color>
     <color name="greeny_blue">#4ab9ba</color>
+    <color name="transparent_dialog">#99000000</color>
 </resources>

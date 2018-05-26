@@ -17,27 +17,16 @@
         app:civ_border_width="1dp"/>
 
     <TextView
-        android:id="@+id/tv_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="TextView"
-        android:textColor="@color/greeny_blue"
-        android:textSize="12sp"
-        app:layout_constraintBaseline_toBaselineOf="@+id/tv_title"
-        app:layout_constraintStart_toEndOf="@+id/tv_title" />
-
-    <TextView
         android:id="@+id/tv_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tv_title"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title" />
+        app:layout_constraintStart_toStartOf="@+id/tv_price"
+        app:layout_constraintTop_toBottomOf="@+id/tv_price" />
 
     <TextView
-        android:id="@+id/tv_title"
+        android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
