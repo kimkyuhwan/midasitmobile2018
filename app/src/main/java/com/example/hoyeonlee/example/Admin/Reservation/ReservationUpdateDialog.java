@@ -97,6 +97,7 @@ public class ReservationUpdateDialog extends Dialog {
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
                     context.adapter.deleteReservation(reservation);
+                    dismiss();
                     Log.v(TAG, response.body().toString());
                 } else {
                     try {

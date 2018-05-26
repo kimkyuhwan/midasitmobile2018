@@ -5,6 +5,7 @@ import com.example.hoyeonlee.example.DataSchema.LoginResult;
 import com.example.hoyeonlee.example.DataSchema.Menu;
 import com.example.hoyeonlee.example.DataSchema.Menus;
 import com.example.hoyeonlee.example.DataSchema.Order;
+import com.example.hoyeonlee.example.DataSchema.Report;
 import com.example.hoyeonlee.example.DataSchema.Reservation;
 import com.example.hoyeonlee.example.DataSchema.User;
 
@@ -22,6 +23,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -85,16 +87,25 @@ public interface ApiService {
     @GET(subURL+"users/")
     Call<ArrayList<User>> getUsers();
 
+    @DELETE(subURL+"users/{id}/")
+    Call<ResponseBody> deleteUser(@Path("id") String id);
+
+    @PATCH(subURL+"users/{id}/")
+    Call<User> updateUser(@Path("id") String id,@Body RequestBody body);
 
      @GET(subURL+"orders/")
     Call<ArrayList<Reservation>> getMyOrders();
+
+    @GET(subURL+"report/{id}")
+    Call<Report> getUserInfos(@Path("id") String id);
 
     @GET(subURL+"orders/?complete=false")
     Call<ArrayList<Reservation>> getMyUnCompletedOrders();
 
     @GET(subURL+"orders/?complete=true")
     Call<ArrayList<Reservation>> getMyCompletedOrders();
-
+    @GET(subURL+"logs/")
+    Call<ArrayList<String>> getLog();
     @GET(subURL+"events/")
     Call<ArrayList<Event>> getEvents();
 

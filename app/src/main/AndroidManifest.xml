@@ -3,13 +3,13 @@
     package="com.example.hoyeonlee.example">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".MApplication"
         android:allowBackup="true"
-        android:icon="@drawable/midas_main_logo"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -47,8 +47,8 @@
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-
         <activity android:name=".Admin.HomeActivity" />
+
         <activity android:name=".Admin.Reservation.ReservationActivity" />
         <activity android:name=".Admin.Menu.MenuActivity" />
         <activity android:name=".Admin.User.UserActivity" />
@@ -56,6 +56,9 @@
         <activity android:name=".Customer.EventDetailActivity"></activity>
         <activity android:name=".Admin.Event.EventCheckActivity"/>
         <activity android:name=".Admin.Event.EventCreatelActivity"/>
+
+        <activity android:name=".Admin.Statistics.StatisticsActivity"/>
+        <activity android:name=".Admin.Log.LogActivity"/>
     </application>
 
 </manifest>

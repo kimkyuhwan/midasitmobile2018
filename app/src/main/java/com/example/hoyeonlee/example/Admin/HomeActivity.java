@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.hoyeonlee.example.Admin.Event.EventCheckActivity;
+import com.example.hoyeonlee.example.Admin.Log.LogActivity;
 import com.example.hoyeonlee.example.Admin.Menu.MenuActivity;
 import com.example.hoyeonlee.example.Admin.Reservation.ReservationActivity;
+import com.example.hoyeonlee.example.Admin.Statistics.StatisticsActivity;
 import com.example.hoyeonlee.example.Admin.User.UserActivity;
 import com.example.hoyeonlee.example.BackActionBarActivity;
 import com.example.hoyeonlee.example.Network.SharedPreferenceBase;
@@ -39,6 +41,8 @@ public class HomeActivity extends BackActionBarActivity {
     Button eventManageBtn;
     @BindView(R.id.tv_hello)
     TextView tvHello;
+    @BindView(R.id.btn_log)
+    Button btnLog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +55,13 @@ public class HomeActivity extends BackActionBarActivity {
         status = SharedPreferenceBase.getIntSharedPreference("status");
         tvHello.setText(SharedPreferenceBase.getSharedPreference("name", "")
                 + (status == 1 ? "관리자" : "최고관리자") + "님 환영합니다");
+        if(status == 1){
+            btnLog.setVisibility(View.INVISIBLE);
+            layoutCustomer.setVisibility(View.INVISIBLE);
+        }
     }
 
-    @OnClick({R.id.btn_logout, R.id.layout_reservation, R.id.layout_customer, R.id.layout_menu, R.id.layout_statistics, R.id.eventManageBtn})
+    @OnClick({R.id.btn_logout, R.id.layout_reservation, R.id.layout_customer, R.id.layout_menu, R.id.layout_statistics, R.id.eventManageBtn,R.id.btn_log})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_logout:
@@ -69,10 +77,13 @@ public class HomeActivity extends BackActionBarActivity {
                 startActivity(new Intent(getApplicationContext(), MenuActivity.class));
                 break;
             case R.id.layout_statistics:
-                startActivity(new Intent(getApplicationContext(), MenuActivity.class));
+                startActivity(new Intent(getApplicationContext(), StatisticsActivity.class));
                 break;
             case R.id.eventManageBtn:
                 startActivity(new Intent(getApplicationContext(), EventCheckActivity.class));
+                break;
+            case R.id.btn_log:
+                startActivity(new Intent(getApplicationContext(), LogActivity.class));
                 break;
         }
     }

@@ -88,7 +88,7 @@ public class MenuUpdateDialog extends Dialog {
         setContentView(R.layout.dialog_addmenu);
         ButterKnife.bind(this);
         apiService = MApplication.getInstance().getApiService();
-        categoryList = new LinkedList<>(Arrays.asList("커피", "차", "요거트", "디저트"));
+        categoryList = new LinkedList<>(Arrays.asList("커피", "티", "요거트", "디저트"));
         spinnerCategory.attachDataSource(categoryList);
 
         //Dialog Size 조정
@@ -108,7 +108,7 @@ public class MenuUpdateDialog extends Dialog {
                 case "커피":
                     spinnerCategory.setSelectedIndex(0);
                     break;
-                case "차":
+                case "티":
                     spinnerCategory.setSelectedIndex(1);
                     break;
                 case "요거트":
