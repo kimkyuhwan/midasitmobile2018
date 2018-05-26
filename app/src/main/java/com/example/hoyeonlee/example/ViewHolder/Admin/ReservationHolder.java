@@ -21,16 +21,29 @@ public class ReservationHolder extends RecyclerView.ViewHolder {
     public ImageView profileView;
     public TextView timeView;
     public TextView priceView;
-
+    public TextView nameView;
     public ReservationHolder(Context context, View view){
         super(view);
         this.context = context;
         this.view = view;
-        profileView = view.findViewById(R.id.iv_profile);
+        profileView = view.findViewById(R.id.iv_image);
         timeView = view.findViewById(R.id.tv_time);
         priceView = view.findViewById(R.id.tv_price);
+        nameView = view.findViewById(R.id.tv_name);
     }
 
+
+    public void setData(String imageUrl, String name ,String time, int price){
+        String dateTime = DateTime.parse(time).toString("MM월 dd일 HH시 mm분 ss초");
+        Picasso.get().load(imageUrl)
+                .resize(100,100)
+                .placeholder(R.drawable.placeholder)
+                .centerCrop().into(profileView); // Image scaling typeinto(profileView// );
+        timeView.setText(dateTime);
+        String pr = String.format("%,d원", price);
+        priceView.setText(pr);
+        nameView.setText(name+"님");
+    }
 
     public void setData(boolean state, String time, int price){
         String dateTime = DateTime.parse(time).toString("MM월 dd일 HH시 mm분 ss초");
@@ -42,6 +55,8 @@ public class ReservationHolder extends RecyclerView.ViewHolder {
         String pr = String.format("%,d원", price);
         priceView.setText(pr);
     }
+
+
     public View getView() {
         return view;
     }
